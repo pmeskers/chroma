@@ -1,0 +1,1 @@
+chroma = angular.module('chroma', []);
