@@ -10,9 +10,11 @@
 
   <body ng-controller="AppController">
     <div id='chromaMain' color-container>
-      <input type="range" min="0" max="255" ng-model="rgbValues[0]" />
-      <input type="range" min="0" max="255" ng-model="rgbValues[1]" />
-      <input type="range" min="0" max="255" ng-model="rgbValues[2]" />
+      <div ng-controller="RgbController">
+        <input type="range" min="0" max="255" ng-model="rgbValues[0]" />
+        <input type="range" min="0" max="255" ng-model="rgbValues[1]" />
+        <input type="range" min="0" max="255" ng-model="rgbValues[2]" />
+    </div>
     </div>
   </body>
 </html>
