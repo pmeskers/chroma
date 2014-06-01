@@ -3,11 +3,18 @@
   };
 
   _.extend(Color.prototype, {
-    setRGB: function (rgbArray) {
-      this.rgb = rgbArray;
+    setRGB: function setRGB (rgbArray) {
+      this.rgb = _.map(rgbArray, function(value) {
+        return parseInt(value);
+      });
       this.hex = '#' + RGBtoHex(this.rgb);
       return this;
     },
+    setHex: function setHex (hex) {
+      this.hex = hex;
+      this.rgb = HextoRGB(this.hex);
+      return this;
+    }
   });
 
   function RGBtoHex(rgb) {
@@ -25,8 +32,19 @@
     return r16 + g16 + b16;
   }
 
+  function HextoRGB(hex) {
+    var r10, g10, b10;
+
+    r10 = parseInt(hex.substr(1,2), 16);
+    g10 = parseInt(hex.substr(3,2), 16);
+    b10 = parseInt(hex.substr(5,2), 16);
+
+    return [r10, g10, b10];
+  }
+
   chroma.service('Color', function () {
     this.createFromRGB = function (r,g,b) {
+      var newColor = new Color();
       return new Color().setRGB([r,g,b]);
     };
 

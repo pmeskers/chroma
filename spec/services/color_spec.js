@@ -2,17 +2,15 @@ describe('Color', function () {
   beforeEach(module('chroma'));
 
   beforeEach(inject(function (Color) {
-    this.Color = Color;
+    this.ColorService = Color;
   }));
 
   describe('.createFromRGB', function () {
     beforeEach(function () {
-      this.color = this.Color.createFromRGB(135, 210, 151);
+      this.color = this.ColorService.createFromRGB(135, 210, 151);
     });
 
-    it('returns a color object', function () {
-      expectToBeColor(this.color);
-    });
+    itBehavesLikeAColor();
 
     describe('the created color', function () {
       it('has the correct RGB set', function () {
@@ -26,16 +24,65 @@ describe('Color', function () {
   });
 
   describe('.createRandom', function () {
-    it('returns a random color', function () {
-      var randomColor = this.Color.createRandom();
+    beforeEach(function () {
+      this.color = this.ColorService.createRandom();
+    });
 
-      expectToBeColor(randomColor);
-      expect(randomColor).not.toEqual(this.Color.createRandom());
+    itBehavesLikeAColor();
+
+    it('returns a different color each call', function () {
+      expect(this.Color).not.toEqual(this.ColorService.createRandom());
     });
   });
 
-  function expectToBeColor (color) {
-    expect(color.rgb).toEqual([jasmine.any(Number), jasmine.any(Number), jasmine.any(Number)]);
-    expect(color.hex.length).toEqual(7);
+  function itBehavesLikeAColor () {
+    describe('returns a color', function () {
+      beforeEach(function () {
+        this.testColor = Object.create(this.color);
+      });
+
+      it('has rgb set', function () {
+        expect(this.testColor.rgb).toEqual([jasmine.any(Number), jasmine.any(Number), jasmine.any(Number)]);
+      });
+
+      it('has hex set', function () {
+        expect(this.testColor.hex.length).toEqual(7);
+      });
+
+      describe('#setRGB', function () {
+        beforeEach(function () {
+          this.rgbValues = [20, 30, 40];
+          this.testColor.setRGB(this.rgbValues);
+        });
+
+        it('updates the rgb value', function () {
+          expect(this.testColor.rgb).toEqual(this.rgbValues);
+          expect(this.testColor.rgb).not.toBe(this.rgbValues);
+        });
+
+        it('updates the hex value', function () {
+          expect(this.testColor.hex).toEqual('#141e28');
+        });
+
+        it('supports strings', function () {
+          this.testColor.setRGB(['255', '30', '149']);
+          expect(this.testColor.rgb).toEqual([255, 30, 149]);
+        });
+      });
+
+      describe('#setHex', function () {
+        beforeEach(function () {
+          this.testColor.setHex('#a1d20f');
+        });
+
+        it('updates the rgb value', function () {
+          expect(this.testColor.rgb).toEqual([161, 210, 15]);
+        });
+
+        it('updates the hex value', function () {
+          expect(this.testColor.hex).toEqual('#a1d20f');
+        });
+      });
+    });
   }
 });
