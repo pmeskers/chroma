@@ -16,4 +16,4 @@ describe('AppController', function () {
       expect(this.scope.currentColor).toEqual(this.randomColor);
     });
   });
-})
+});
