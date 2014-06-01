@@ -24,13 +24,27 @@ module.exports = function(grunt) {
       files: ['Gruntfile.js', 'server.js']
     },
 
+    jasmine: {
+      src: [
+        'web/public/js/vendor.js',
+        'bower_components/angular-mocks/angular-mocks.js',
+        'web/public/js/config.js',
+        'web/public/js/app.js'
+      ],
+      options: {
+        specs: ['spec/**/*.js']
+      }
+    },
+
     uglify: {
       dev: {
         files: {
           'web/public/js/config.js': ['src/js/modules/*.js'],
           'web/public/js/app.js': ['src/js/**/*.js', '!src/js/modules/*.js'],
-          'web/public/js/vendor.js':
-            ['bower_components/angular/angular.js']
+          'web/public/js/vendor.js': [
+            'bower_components/angular/angular.js',
+            'bower_components/lodash/dist/lodash.js'
+          ]
         }
       }
     },
@@ -66,6 +80,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');

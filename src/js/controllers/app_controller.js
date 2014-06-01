@@ -1,3 +1,3 @@
-chroma.controller('AppController', ['$scope', function ($scope) {
-  $scope.foo = 'bar';
+chroma.controller('AppController', ['$scope', 'Color', function ($scope, Color) {
+  $scope.currentColor = Color.createRandom();
 }]);
