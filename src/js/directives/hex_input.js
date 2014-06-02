@@ -7,9 +7,13 @@ chroma.directive('hexInput', function () {
 
       element.on('keyup', function () {
         var value = element.val();
-        if (/[a-f|0-9]{6}$/.test(value)) {
+        if (/^#?[a-f|0-9]{6}$/.test(value)) {
           scope.$apply(function () {
-            scope.hexValue = '#' + value;
+            if (value[0] !== '#') {
+              scope.hexValue = '#' + value;
+            } else {
+              scope.hexValue = value;
+            }
           });
         }
       });

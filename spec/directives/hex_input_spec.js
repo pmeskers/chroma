@@ -30,21 +30,31 @@ describe('hexInput', function () {
       });
     });
 
+    describe('when the input has a 6-character hex number with a pound', function () {
+      it('updates the hexValue on scope', function () {
+        this.element.val('#001122').triggerHandler('keyup');
+        this.scope.$digest();
+        expect(this.scope.hexValue).toEqual('#001122');
+      });
+
+      it('removes the pound from the element value', function () {
+        this.element.val('#001122').triggerHandler('keyup');
+        this.scope.$digest();
+        expect(this.element.val()).toEqual('001122');
+      });
+    });
+
     describe('when the input has an invalid hex number', function () {
       it('does not update the hexValue on scope', function () {
         this.element.val('abc').triggerHandler('keyup');
         this.scope.$digest();
         expect(this.scope.hexValue).toEqual('#aabbcc');
 
-        this.element.val('210efg').triggerHandler('change');
+        this.element.val('210efg').triggerHandler('keyup');
         this.scope.$digest();
         expect(this.scope.hexValue).toEqual('#aabbcc');
 
-        this.element.val('210ef01').triggerHandler('change');
-        this.scope.$digest();
-        expect(this.scope.hexValue).toEqual('#aabbcc');
-
-        this.element.val('#f0f0f0').triggerHandler('change');
+        this.element.val('210ef01').triggerHandler('keyup');
         this.scope.$digest();
         expect(this.scope.hexValue).toEqual('#aabbcc');
       });
