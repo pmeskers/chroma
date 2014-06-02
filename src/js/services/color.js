@@ -4,9 +4,7 @@
 
   _.extend(Color.prototype, {
     setRGB: function setRGB (rgbArray) {
-      this.rgb = _.map(rgbArray, function(value) {
-        return parseInt(value);
-      });
+      this.rgb = _.clone(rgbArray);
       this.hex = '#' + RGBtoHex(this.rgb);
       return this;
     },

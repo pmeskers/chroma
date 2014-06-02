@@ -27,8 +27,10 @@ describe('RgbController', function () {
 
     it('sets currentColor rgb', function () {
       expect(this.scope.currentColor.rgb).toEqual([33, 66, 199]);
+    });
 
-      this.scope.rgbValues[1] = 10;
+    it('keeps rgbValues as integers', function () {
+      this.scope.rgbValues[1] = '10';
       this.scope.$digest();
       expect(this.scope.currentColor.rgb).toEqual([33, 10, 199]);
     });

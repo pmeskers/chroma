@@ -3,8 +3,10 @@ chroma.controller('RgbController', ['$scope', function ($scope, Color) {
 
   $scope.$watch('rgbValues', function (oldValue, newValue) {
     if (oldValue !== newValue) {
+      $scope.rgbValues = _.map($scope.rgbValues, function (value) {
+        return parseInt(value);
+      });
       $scope.currentColor.setRGB($scope.rgbValues);
-      console.log('updated color to', $scope.currentColor);
     }
   }, true);
 }]);

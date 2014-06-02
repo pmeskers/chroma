@@ -63,11 +63,6 @@ describe('Color', function () {
         it('updates the hex value', function () {
           expect(this.testColor.hex).toEqual('#141e28');
         });
-
-        it('supports strings', function () {
-          this.testColor.setRGB(['255', '30', '149']);
-          expect(this.testColor.rgb).toEqual([255, 30, 149]);
-        });
       });
 
       describe('#setHex', function () {
