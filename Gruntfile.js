@@ -42,6 +42,7 @@ module.exports = function(grunt) {
           'web/public/js/config.js': ['src/js/modules/*.js'],
           'web/public/js/app.js': ['src/js/**/*.js', '!src/js/modules/*.js'],
           'web/public/js/vendor.js': [
+            'bower_components/jquery/jquery.js',
             'bower_components/angular/angular.js',
             'bower_components/lodash/dist/lodash.js'
           ]

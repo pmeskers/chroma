@@ -19,6 +19,7 @@ html, body {
 
 #hex-controls {
   width: 20%;
+  margin-top: 60px;
 }
 
 .color-controls {
@@ -33,7 +34,6 @@ html, body {
 
 .small-input {
   width: 60px;
-  font-size: 20px;
   background: transparent;
   border: none;
   border-bottom: solid 1px gray;
@@ -45,13 +45,36 @@ html, body {
   }
 }
 
+.hex-pound {
+  font-size: 24px;
+  margin-right: -24px;
+  z-index: 2;
+}
+.hex-input {
+  width: 120px;
+  padding-left: 24px;
+
+}
+
 input {
+  font-size: 20px;
   &:focus {
     outline: none;
   }
 }
 input[type=range] {
   margin: 0 20px 20px 0;
+}
+input[type=text] {
+  background: transparent;
+  border: none;
+  border-bottom: solid 1px gray;
+  border-radius: 2px;
+
+  &:focus {
+    background: rgba(255,255,255,0.5);
+    border: none;
+  }
 }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
