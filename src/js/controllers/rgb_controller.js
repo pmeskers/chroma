@@ -1,6 +1,4 @@
-chroma.controller('RgbController', ['$scope', function ($scope, Color) {
-  $scope.rgbValues = _.clone($scope.currentColor.rgb);
-
+chroma.controller('RgbController', ['$scope', function ($scope) {
   $scope.$watch('rgbValues', function (oldValue, newValue) {
     if (oldValue !== newValue) {
       $scope.rgbValues = _.map($scope.rgbValues, function (value) {
@@ -8,5 +6,9 @@ chroma.controller('RgbController', ['$scope', function ($scope, Color) {
       });
       $scope.currentColor.setRGB($scope.rgbValues);
     }
+  }, true);
+
+  $scope.$watch('currentColor', function () {
+    $scope.rgbValues = _.clone($scope.currentColor.rgb);
   }, true);
 }]);

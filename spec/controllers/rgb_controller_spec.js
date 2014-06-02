@@ -2,10 +2,10 @@ describe('RgbController', function () {
   beforeEach(module('chroma'));
 
   beforeEach(inject(function ($rootScope, $controller, Color) {
-    this.randomColor = Color.createRandom();
+    this.currentColor = Color.createRandom();
 
     this.scope = $rootScope.$new();
-    this.scope.currentColor = this.randomColor;
+    this.scope.currentColor = this.currentColor;
     $controller('RgbController', {
       $scope: this.scope
     });
@@ -14,8 +14,8 @@ describe('RgbController', function () {
 
   describe('initialization', function () {
     it('copies the current color RGB values', function () {
-      expect(this.scope.rgbValues).toEqual(this.randomColor.rgb);
-      expect(this.scope.rgbValues).not.toBe(this.randomColor.rgb);
+      expect(this.scope.rgbValues).toEqual(this.currentColor.rgb);
+      expect(this.scope.rgbValues).not.toBe(this.currentColor.rgb);
     });
   });
 
@@ -26,13 +26,24 @@ describe('RgbController', function () {
     });
 
     it('sets currentColor rgb', function () {
-      expect(this.scope.currentColor.rgb).toEqual([33, 66, 199]);
+      expect(this.currentColor.rgb).toEqual([33, 66, 199]);
     });
 
     it('keeps rgbValues as integers', function () {
       this.scope.rgbValues[1] = '10';
       this.scope.$digest();
-      expect(this.scope.currentColor.rgb).toEqual([33, 10, 199]);
+      expect(this.currentColor.rgb).toEqual([33, 10, 199]);
+    });
+  });
+
+  describe('on change of current color', function () {
+    beforeEach(function () {
+      this.scope.currentColor.setHex('#999999');
+      this.scope.$digest();
+    });
+
+    it('updates the local hex value', function () {
+      expect(this.scope.rgbValues).toEqual([153, 153, 153]);
     });
   });
 });

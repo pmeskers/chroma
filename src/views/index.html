@@ -11,18 +11,22 @@
 
   <body ng-controller="AppController">
     <div color-container id='chromaMain'>
-      <div ng-controller="RgbController" id="rgbControls">
-      <div>
-        <input type="range" min="0" max="255" ng-model="rgbValues[0]" />
-        <input type="number" class='small-input' min="0" max="255" pattern="\d{1,3}" ng-model="rgbValues[0]" />
-      </div><div>
-        <input type="range" min="0" max="255" ng-model="rgbValues[1]" />
-        <input type="number" class='small-input' min="0" max="255" ng-model="rgbValues[1]" />
-      </div><div>
-        <input type="range" min="0" max="255" ng-model="rgbValues[2]" />
-        <input type="number" class='small-input' min="0" max="255" ng-model="rgbValues[2]" />
+      <div ng-controller="RgbController" id="rgb-controls" class="color-controls">
+        <div>
+          <input type="range" min="0" max="255" ng-model="rgbValues[0]" />
+          <input type="number" class='small-input' min="0" max="255" pattern="\d{1,3}" ng-model="rgbValues[0]" />
+        </div><div>
+          <input type="range" min="0" max="255" ng-model="rgbValues[1]" />
+          <input type="number" class='small-input' min="0" max="255" ng-model="rgbValues[1]" />
+        </div><div>
+          <input type="range" min="0" max="255" ng-model="rgbValues[2]" />
+          <input type="number" class='small-input' min="0" max="255" ng-model="rgbValues[2]" />
+        </div>
       </div>
-    </div>
+
+      <div ng-controller="HexController" id="hex-controls" class="color-controls">
+        <input type="text" ng-model="hexValue" />
+      </div>
     </div>
   </body>
 </html>
