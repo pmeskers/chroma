@@ -49,9 +49,11 @@ module.exports = function(grunt) {
           'web/public/js/app.js': ['src/js/**/*.js', '!src/js/modules/*.js'],
           'web/public/js/vendor.js': [
             'bower_components/angular/angular.js',
-            'bower_components/lodash/dist/lodash.js',
+            'bower_components/lodash/dist/lodash.js'
+          ],
+          'web/public/js/zeroclipboard.js': [
             'bower_components/zeroclipboard/ZeroClipboard.js'
-          ]
+          ] // ZeroClipboard crashes jasmine, make separate.
         }
       }
     },

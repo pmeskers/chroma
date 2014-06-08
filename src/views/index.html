@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="public/css/app.css"></link>
     <script type="text/javascript" src="public/js/vendor.js"></script>
+    <script type="text/javascript" src="public/js/zeroclipboard.js"></script>
     <script type="text/javascript" src="public/js/config.js"></script>
     <script type="text/javascript" src="public/js/app.js"></script>
 
@@ -28,6 +29,17 @@
         <span class='hex-pound'>#</span>
         <input hex-input class="hex-input" type="text" />
         <div id="copy-hex" data-clipboard-text="{{hexValue}}" title="Click to copy.">∂</div>
+      </div>
+
+      <div ng-controller="FavoritesController" id="favorites" class="color-controls">
+        <span id='save-color' ng-click='saveCurrentColor()'>+</span>
+        <ul class="favorites-list">
+          <li ng-repeat='color in savedColors'
+              class='favorites-item'
+              style='background: {{color.hex}}'
+              ng-click='loadColor(color)'>
+          </li>
+        </ul>
       </div>
     </div>
   </body>
